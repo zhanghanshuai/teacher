@@ -1,0 +1,18 @@
+﻿@{
+    Layout = null;
+}
+@Model  BookTypes;
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>edit</title>
+</head>
+<body>
+    <div>
+      <input id="booktype_edit_id" type="hidden" value="@Model.ID"/>
+        <input id="booktype_edit_name" type="text" value="@Model.Name" >  
+    </div>
+</body>
+</html>

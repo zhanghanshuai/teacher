@@ -1,0 +1,204 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/jquery-easyui-1.5.1/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/jquery-easyui-1.5.1/themes/icon.css" rel="stylesheet" />
+     <script src="~/Scripts/jquery-2.2.1.js"></script>
+    <script src="~/jquery-easyui-1.5.1/jquery.easyui.min.js"></script>
+     <script>
+        //function del(Id) {//console.log(Id);
+        //     $.get("/getDepartments/delete", { id: Id }, function (data) {
+
+        //         if (data == "ok")
+
+        //             $("#tb").datagrid("reload");
+
+        //         else
+        //             alert("删除失败");
+
+        //     }, "text")
+        // }
+
+
+
+    </script>
+     <script type="text/javascript">
+         $(function () {
+             $("#dig").dialog({ closed: true });
+         })
+         var toolbar = [{
+             text: '添加',
+             iconCls: 'icon-add',
+             handler: function () {
+                 $("#dig").dialog({
+                     title: "部门添加---",
+                     iconCls: 'icon-add',
+                     closed: false,
+                     modal: true,
+                     width: 400,
+                     height: 300,
+                     buttons: [
+                         {
+                             text: '保存',
+                             iconCls: 'icon-save',
+                             handler: function () {
+                                 $.get("/getDepartments/add", { name: $("#text").val(), Status: 0 }, function (data) {
+                                     if (data == "ok") {
+                                         $.messager.show({
+                                             title: '提示...',
+                                             msg: '保存成功',
+                                             showType: 'show'
+                                         })
+                                         $("#dig").dialog("close");
+                                         $("#tb").datagrid("reload");
+                                         $("#text").val("");
+                                     }
+
+                                     else {
+                                         alert("出错");
+                                     }
+
+
+                                 }, "text")
+                             }
+
+
+                         }, {
+                             text: '取消',
+                             iconCls: 'icon-cancel',
+                             handler: function () {
+                                 $("#dig").dialog("close");
+                                 $("#text").val("");
+                             }
+
+                         }
+                     ]
+
+                 });
+             }
+         }, {
+             text: '修改',
+             iconCls: 'icon-edit',
+             handler: function () {
+                 var id = $("#tb").datagrid("getSelected").Id;
+                 var url = "/getDepartments/getchange?id=" + id;
+                 $("#digedit").dialog({
+                     title: "部门修改---",
+                     iconCls: 'icon-edit',
+
+                     modal: true,
+                     width: 400,
+                     height: 300,
+                     href: url,
+                     buttons: [
+                         {
+                             text: '修改',
+                             iconCls: 'icon-edit',
+                             handler: function () {
+                                 var name = $("#View_getchange_text").val();
+                                 var id = $("#View_getchange_id").val();
+                                 $.get("/getDepartments/change", { id: id, name: name, Status: 0 }, function (data) {
+                                     if (data == "ok") {
+                                         $.messager.show({
+                                             title: '提示...',
+                                             msg: '修改成功',
+                                             showType: 'show'
+                                         })
+
+                                         $("#tb").datagrid("reload");
+                                         $("#digedit").dialog("close");
+                                     }
+                                     else { alert("失败"); }
+
+                                 }, "text")
+
+                             }
+
+
+                         }, {
+                             text: '取消',
+                             iconCls: 'icon-cancel',
+                             handler: function () {
+                                 $("#digedit").dialog("close");
+
+                             }
+
+                         }
+                     ]
+
+                 });
+
+             }
+
+         }, '-', {
+             text: '删除',
+             iconCls: 'icon-remove',
+             handler: function () {
+                 //var id = $("#tb").datagrid("getSelected").Id;
+                 //del(id);
+                 var row = $("#tb").datagrid("getSelected")
+                 if (row != null) {
+                     var name = row.Name;
+                     $.messager.confirm("提示...", "确定要重置“" + name + "”密码吗", function (retult) {
+                         if (retult) {
+                             var id = row.Id;
+                             $.get("/getDepartments/delete/", { id: id }, function (data) {
+                                 if (data == "ok") {
+                                     $("#tb").datagrid("reload");
+
+                                     $.messager.show({
+                                         title: '提示...',
+                                         msg: '删除成功',
+                                         showType: 'show'
+
+                                     })
+                                 }
+
+                                 else
+                                     $.messager.show({
+                                         title: '提示...',
+                                         msg: '删除失败',
+                                         showType: 'show'
+
+                                     })
+
+
+                             }, "text")
+                         }
+                     })
+
+                 }
+              
+             }
+         }];
+          </script>
+    </head>
+<body>
+        <table id="tb" class="easyui-datagrid" title="商业......" style="width:400px;height:250px"
+            data-options="rownumbers:true,collapsible:true,url:'/getDepartments/getteach',method:'get',toolbar:toolbar">
+        <thead>
+            <tr>
+                <th data-options="field:'Name',width:300">商业部门</th>
+            </tr>
+        </thead>
+             </table>
+    <div id="dig">
+         <div><br><br><br><br><br><br><br>&nbsp;&nbsp;&nbsp;
+       部门名称： <input type="text" id="text"name="name"/>
+    </div>
+    </div><div>
+        <br><br><br><br><br><br>&nbsp;&nbsp;&nbsp;
+    <div id="digedit"></div>
+
+          </div>
+   
+   
+</body>
+</html>

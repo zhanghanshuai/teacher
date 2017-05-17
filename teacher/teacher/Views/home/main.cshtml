@@ -1,0 +1,62 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>main</title>
+    <link href="~/jquery-easyui-1.5.1/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/jquery-easyui-1.5.1/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-2.2.1.js"></script>
+    <script src="~/jquery-easyui-1.5.1/jquery.easyui.min.js"></script>
+      <script>
+          function addtab(title, url) {
+              if ($("#tabs").tabs("exists", title)) {
+                  $("#tabs").tabs("select", title);
+              }
+              else {
+                  $("#tabs").tabs(
+                      'add', {
+                          title: title,
+                          //href: '/getDepartments/',
+                          content: '<iframe style="margin:5px; width:100%; height:100%;border:0"  src="' + url + '"></iframe>',
+                          closable: true
+
+                      })
+              }
+          }
+      </script>
+</head>
+<body>
+  <div class="easyui-layout" style="width:1200px;height:600px;">
+       <div data-options="region:'north'" style="height:60px;background:url('/images/top.jpg')">
+            <div style="float:left;font-size:36px;color:white;margin:10px 0 0 20px;width:500px;">系部日常办公协同管理平台</div>
+            <div style="text-align:right;float:right;color:white;margin:10px 20px 0 0;width:600px;"><span style="padding:15px 40px 0 0;">你好,@ViewBag.teacherName</span><a class="easyui-linkbutton">注销</a></div>
+        </div>
+        <div data-options="region:'north'" style="height:100px"></div>
+        <div data-options="region:'south',split:true" style="height:100px;"></div>
+        <div data-options="region:'east',split:true" title="East" style="width:100px;"></div>
+        <div class="easyui-accordion" data-options="region:'west',split:true" title="West" style="width:100px;">
+            <div data-options="iconCls:'icon-tip'" title="系统管理">
+    <a href="#" class="easyui-linkbutton"data-options="plain:true,iconCls:'icon-add'" style="width:100%" onclick="addtab('部门管理','/getDepartments/');">部门管理</a>
+                 <a href="#" class="easyui-linkbutton"data-options="plain:true,iconCls:'icon-add'" style="width:100%" onclick="addtab('专业管理','/magors/');">专业管理</a>
+                 <a href="#" class="easyui-linkbutton"data-options="plain:true,iconCls:'icon-add'" style="width:100%" onclick="addtab('教师管理','/teacher/');">教师管理</a>
+                  <a href="#" class="easyui-linkbutton"data-options="plain:true,iconCls:'icon-add'" style="width:100%" onclick="addtab('班级管理','/class/');">班级管理</a>
+                  <a href="#" class="easyui-linkbutton"data-options="plain:true,iconCls:'icon-add'" style="width:100%" onclick="addtab('学生管理','/student/');">学生管理</a>
+                 <a href="#" class="easyui-linkbutton"data-options="plain:true,iconCls:'icon-add'" style="width:100%" onclick="addtab('类型','/type/');">类型管理</a>
+                <a href="#" class="easyui-linkbutton"data-options="plain:true,iconCls:'icon-add'" style="width:100%" onclick="addtab('字典','/BaseDataDics/');">字典管理</a>
+            </div>
+            <div title="系统管理"></div>
+
+           
+        </div>
+        <div id="tabs" class="easyui-tabs" data-options="region:'center'">
+            <div title="欢迎使用"></div>
+           
+        </div>
+      </div>
+</body>
+</html>

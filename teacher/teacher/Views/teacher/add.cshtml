@@ -1,0 +1,34 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>add</title>
+</head>
+<body>
+    <div style="margin:10px">
+
+        <form id="teacher_add" method="get" action="/teacher/addteacher/">
+         所属部门：<input id="teacher_add_dep" name="DeptID"><br>
+        姓名：<input id="teacher_add_teachername" name="Name" class="easyui-textbox" > <br> 
+           教工号：<input id="teacher_add_teacherID" name="TeacherID" class="easyui-textbox" > <br> 
+        允许登陆：<input type="checkbox" id="teacher_add_IsLogin" name="IsLogin" value="1" />
+
+        </form>
+    </div>
+     <script>
+         $(function () {
+             $("#teacher_add_dep").combobox({
+                 url: "/getDepartments/getteach",
+                 valueField: 'Id',
+                 textField:"Name"
+             })
+             })
+         
+    </script>
+</body>
+</html>

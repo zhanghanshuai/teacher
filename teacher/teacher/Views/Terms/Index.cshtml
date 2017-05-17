@@ -1,0 +1,191 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/jquery-easyui-1.5.1/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/jquery-easyui-1.5.1/themes/icon.css" rel="stylesheet" />
+     <script src="~/Scripts/jquery-2.2.1.js"></script>
+    <script src="~/jquery-easyui-1.5.1/jquery.easyui.min.js"></script>
+   <script>
+        $(function () {
+        $('#tb').datagrid({
+            url: '/Terms/getterms',
+            width: 400,
+            height: 400,
+            fitColumns: true,
+            singleSelect: true,
+            toolbar :[{
+                text: '添加',
+                iconCls: 'icon-add',
+                handler: function () {
+                    $("#Terms_add_dig").dialog({
+                        title: "部门添加---",
+                        iconCls: 'icon-add',
+                        closed: false,
+                        modal: true,
+                        href: '/Terms/add',
+                        width: 400,
+                        height: 300,
+                        buttons: [
+                            {
+                                text: '保存',
+                                iconCls: 'icon-save',
+                                handler: function () {
+                                 
+                                    var depid = $("#terms_add_name").val();
+                                    $.get("/Terms/addterms", {  Name: depid, Status: 0 }, function (data) {
+                                        
+                                        if (data == "ok") {
+                                            $.messager.show({
+                                                title: '提示...',
+                                                msg: '保存成功',
+                                                showType: 'show'
+                                            })
+                                            $("#Terms_add_dig").dialog("close");
+                                            $("#tb").datagrid("reload");
+                                            
+                                        }
+
+                                        else {
+                                            alert("出错");
+                                        }
+
+
+                                    }, "text")
+                                }
+
+
+                            }, {
+                                text: '取消',
+                                iconCls: 'icon-cancel',
+                                handler: function () {
+                                    $("#Terms_add_dig").dialog("close");
+                                 
+                                }
+
+                            }
+                        ]
+
+                    });
+                }
+            }, 
+         
+            {
+                text: '修改',
+                iconCls: 'icon-edit',
+                handler: function () {
+                    var id = $("#tb").datagrid("getSelected").ID;
+                    var url = "/Terms/edit?id=" + id;
+                    $("#Terms_edit_dig").dialog({
+                        title: "部门修改---",
+                        iconCls: 'icon-edit',
+
+                        modal: true,
+                        width: 400,
+                        height: 300,
+                        href: url,
+                        buttons: [
+                            {
+                                text: '修改',
+                                iconCls: 'icon-edit',
+                                handler: function () {
+                                    var id = $("#terms_edit_id").val();
+                                    var name = $("#terms_edit_name").val();
+                                  
+                                    $.get("/Terms/editterms", { ID: id, Name: name, Status: 0 }, function (data) {
+                                        
+                                        if (data == "ok") {
+                                            $.messager.show({
+                                                title: '提示...',
+                                                msg: '修改成功',
+                                                showType: 'show'
+                                            })
+
+                                            $("#tb").datagrid("reload");
+                                            $("#Terms_edit_dig").dialog("close");
+                                        }
+                                        else { alert("失败"); }
+
+                                    }, "text")
+
+                                }
+
+
+                            }, {
+                                text: '取消',
+                                iconCls: 'icon-cancel',
+                                handler: function () {
+                                    $("#Terms_edit_dig").dialog("close");
+
+                                }
+
+                            }
+                        ]
+
+                  });
+
+                }
+
+            }, '-', {
+                text: '删除',
+                iconCls: 'icon-remove',
+                handler: function () {
+                    //var id = $("#tb").datagrid("getSelected").ID;
+                    //del(id);
+                    var row = $("#tb").datagrid("getSelected")
+                    if (row != null) {
+                        var name = row.Name;
+                        $.messager.confirm("提示...", "确定要重置“" + name + "”密码吗", function (retult) {
+                            if (retult) {
+                                var id = row.ID;
+                                $.get("/Terms/delete/", { id: id }, function (data) {
+                                    if (data == "ok") {
+                                        $("#tb").datagrid("reload");
+
+                                        $.messager.show({
+                                            title: '提示...',
+                                            msg: '删除成功',
+                                            showType: 'show'
+
+                                        })
+                                    }
+
+                                    else
+                                        $.messager.show({
+                                            title: '提示...',
+                                            msg: '删除失败',
+                                            showType: 'show'
+
+                                        })
+
+
+                                }, "text")
+                            }
+                        })
+
+                    }
+                }
+            }],
+
+            columns: [[
+                
+                {field:'Name',title:'学期表',width:200}
+            ]]
+
+        }) })
+       
+    </script>
+</head>
+<body>
+    <table id="tb"></table>
+    <div id="Terms_add_dig">     
+    </div>
+    <div id="Terms_edit_dig"></div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>edit</title>
+</head>
+<body>
+   <div>
+       <input id="BaseDataDics_edit_id" type="hidden" value="@Model.ID">
+      字典名称 :<input type="text"  class="ersyui-textbox" id="BaseDataDics_edit_name" value="@Model.Name"><br>
+        字典类别：<input type="text"class="ersyui-textbox" id="BaseDataDics_edit_typeNo" value="@Model.TypeNo">
+    </div>
+    <script>
+        $(function () {
+            $("#BaseDataDics_edit_typeNo").combobox({
+                url: "/type/gettype",
+                valueField: 'typid',
+                textField: "name"
+            });
+
+        });
+    </script>
+</body>
+</html>

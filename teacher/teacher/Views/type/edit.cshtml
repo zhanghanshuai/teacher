@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>edit</title>
+</head>
+<body>
+    <div>
+        <input id="type_add_id" type="hidden" value="@Model.ID">
+         类型：<input id="type_edit_name"class="textbox" value="@Model.Name"><br>
+      类型类别：  <input id="type_edit_typeid">
+    </div>
+     <script>
+         $(function () {
+             $("#type_edit_typeid").combobox({
+                 url: "/type/gettype",
+                 valueField: 'id',
+                 textField: "typid"
+             })
+         })
+
+    </script>
+</body>
+</html>

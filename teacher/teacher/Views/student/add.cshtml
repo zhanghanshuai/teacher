@@ -1,0 +1,38 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>add</title>
+    <script src="~/Scripts/jquery-2.2.1.js"> </script>
+</head>
+<body>
+    <div style="margin:10px">
+        <form id="student_add" method="get" action="/student/addstudent" >
+   班级表 ： <input id="student_add_classID" name="ClassID"/><br>
+        姓名：<input id="student_add_Name" name="Name" class="easyui-textbox"/><br>
+        学生id:<input id="student_add_studentID"name="StudentNo" class="easyui-textbox"/><br>
+        电话：<input id="student_add_TelNo"name="TelNum" class="easyui-textbox"/><br>
+        QQ:<input id="student_add_QQNo"name="QQ" class="easyui-textbox"/><br>
+         微信:<input id="student_add_wechatNo"name="WeChat" class="easyui-textbox"/><br>
+         手机:<input id="student_add_PTelNo1" name="PTelNo1" class="easyui-textbox"/><br>
+         是否登陆:<input id="student_add_IsLogin" type="checkbox" name="IsLogin" value="1"/>
+            </form>
+    </div>
+    <script>
+       
+        $(function () {
+            $("#student_add_classID").combobox({
+                url: "/class/getclasses",
+                valueField: 'ID',
+                textField: "Name"
+            })
+        })
+
+    </script>
+</body>
+</html>

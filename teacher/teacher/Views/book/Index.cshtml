@@ -1,0 +1,47 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+     <link href="~/jquery-easyui-1.5.1/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/jquery-easyui-1.5.1/themes/icon.css" rel="stylesheet" />
+     <script src="~/Scripts/jquery-2.2.1.js"></script>
+    <script src="~/jquery-easyui-1.5.1/jquery.easyui.min.js"></script>
+    <script>
+        $(function () {
+            $("#tb").datagrid({
+                url: '',
+                height: 300,
+                width: 300,
+                toolbar: [
+                    {
+                        text: '添加',
+                        iconCls: 'icon_add',
+                        handler: function () {
+                            $("#book_add_dig").dialog({
+                                title:'部门添加---',
+
+                            })
+                        }
+                    }, {}, {}
+                ],
+                columns: [[
+                    {field:'Name',title:''}
+                ]]
+
+            })
+        })
+
+    </script>
+</head>
+<body>
+    <table id="tb"></table>
+    <div id="book_add_dig"></div>
+    <div id="book_edit_dig"></div>
+</body>
+</html>

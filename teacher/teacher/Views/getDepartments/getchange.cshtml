@@ -1,0 +1,43 @@
+﻿@{
+    Layout = null;
+}
+@Model Departments;
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>getchange</title>
+
+    <script src="~/Scripts/jquery-2.2.1.js"></script>
+     <script src="~/Scripts/jquery_ext_hbsi.js"></script>
+ 
+</head>
+<body>
+   
+         <div id="div" >
+             <input type="hidden" id="View_getchange_id" value="@Model.ID">
+      商业部门：  <input type="text" id="View_getchange_text"name="name" value="@Model.Name"/>
+   
+    </div>
+    @*  <script>
+          $(function () {
+              var id = $.getUrlParam('id');
+              $.get("/getDepartments/getdepartmentid", { id: id }, function (data) {
+                  $(data).each(function (index, department) {
+                      $("#text").val(department.Name);
+                  })
+              }, "json")
+              $("#btn").click(function () {
+                  $.get("/getDepartments/change", { id: id, name: $("#text").val(), Status: 0 }, function (das) {
+                      if (das == "ok")
+                      { location.href = "/getDepartments/Index"; }
+
+                      else
+                      { alert("修改失败"); }
+                  }, "text")
+              })
+          });
+    </script>*@
+</body>
+</html>
