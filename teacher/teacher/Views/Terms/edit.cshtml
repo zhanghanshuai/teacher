@@ -1,0 +1,18 @@
+﻿@{
+    Layout = null;
+}
+@Model Terms;
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>edit</title>
+</head>
+<body>
+    <div>
+        <input id="terms_edit_id" type="hidden" value="@Model.ID"/>
+        <input id="terms_edit_name" value="@Model.Name">
+    </div>
+</body>
+</html>

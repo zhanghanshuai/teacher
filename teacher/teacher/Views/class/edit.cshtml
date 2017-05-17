@@ -1,0 +1,37 @@
+﻿@{
+    Layout = null;
+}
+@Model Classes;
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>edit</title>
+    <script src="~/Scripts/jquery-2.2.1.js" ></script>
+</head>
+<body>
+    <div>
+        <form id="classes_edit_form">
+            <input type="hidden" id="classes_edit_classid" value="@Model.ID" name="ID" />
+            <div class="input_line">
+                <label class="leftlabel">班级名称：</label><input class="easyui-textbox" value="@Model.Name" name="Name" id="classes_edit_name" data-options="prompt:'请输入班级名称'">
+            </div>
+            <div class="input_line">
+                <label class="leftlabel">班主任：</label><input id="classes_edit_director" name="TeacherID"   value="@Model.TeacherID"/>
+            </div>
+        </form>
+    </div>
+    <script>
+        $(function () {
+            $("#classes_edit_director").combobox({
+                url: '/teacher/getteachers',
+                valueField: 'ID',
+                textField: 'Name'
+            })
+
+        })
+
+    </script>
+</body>
+</html>

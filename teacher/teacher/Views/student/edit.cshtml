@@ -1,0 +1,41 @@
+﻿@{
+    Layout = null;
+}
+@Model Students;
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>edit</title>
+</head>
+<body>
+    <div>
+        <input type ="hidden" id="student_add_id" name="ID" value="@Model.ID">
+         班级表 ： <input id="student_add_classID" name="ClassID"value="@Model.ClassID"/><br>
+        姓名：<input id="student_add_Name" name="Name" class="easyui-textbox" value="@Model.Name"/><br>
+        学生id:<input id="student_add_studentNo"name="StudentNo" class="easyui-textbox" value="@Model.StudentNo"/><br>
+        电话：<input id="student_add_TelNo"name="TelNum" class="easyui-textbox" value="@Model.TelNum"/><br>
+        QQ:<input id="student_add_QQNo"name="QQ" class="easyui-textbox" value="@Model.QQ"/><br>
+         微信:<input id="student_add_WeChat"name="WeChat" class="easyui-textbox"  value="@Model.WeChat"/><br>
+         手机:<input id="student_add_PTelNo1" name="PTelNo1" class="easyui-textbox" value="@Model.PTelNo1"/><br>
+         是否登陆:<input id="student_add_IsLogin" type="checkbox" name="IsLogin" value="@Model.IsLogin"/>
+    </div>
+     <script>
+
+         $(function () {
+             $("#student_add_classID").combobox({
+                 url: "/class/getclasses",
+                 valueField: 'ID',
+                 textField: "Name"
+             })
+             var a = $("#student_add_IsLogin").val();
+             if (a == "1")
+             {
+                 $("#student_add_IsLogin").attr("checked", "checked");
+             }
+         })
+
+    </script>
+</body>
+</html>

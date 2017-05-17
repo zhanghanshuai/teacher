@@ -1,0 +1,52 @@
+﻿@{
+    Layout = null;
+}
+@Model Teachers;
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>edit</title>
+</head>
+<body>
+    <div>
+         <div style="margin:10px">
+             
+        <form id="teacher_edit" method="get" action="/teacher/editteacher/">
+
+       <input type="hidden" id="teacher_edit_id"name="ID" value="@Model.ID">
+         所属部门：<input id="teacher_edit_dep" name="DeptID"value="@Model.DeptID" ><br>
+        姓名：<input id="teacher_edit_teachername" name="Name" class="easyui-textbox" value="@Model.Name" > <br> 
+           教工号：<input id="teacher_edit_teacherID" name="TeacherID" class="easyui-textbox" value="@Model.TeacherNo" > <br> 
+        允许登陆：<input type="checkbox" id="teacher_edit_IsLogin"Value="@Model.IsLogin"  >
+          
+               
+        </form>
+    </div>
+     <script>
+         $(function () {
+             $("#teacher_edit_dep").combobox({
+                 url: "/getDepartments/getteach",
+                 valueField: 'Id',
+                 textField: "Name",
+                
+             })
+          
+             var a = $("#teacher_edit_IsLogin").val();
+             if (a == "1")
+             {
+                 $("#teacher_edit_IsLogin").attr("checked","checked");
+
+             }
+            
+
+             });        
+        
+
+    </script>
+
+
+    </div>
+</body>
+</html>

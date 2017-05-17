@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>add</title>
+</head>
+<body>
+    <div>
+        <form id="BaseDataDics_add">
+      字典名称 :<input type="text"  class="ersyui-textbox" id="BaseDataDics_add_name"><br>
+        字典类别：<input type="text"class="ersyui-textbox" id="BaseDataDics_add_typeNo" ></form>
+    </div>
+    <script>
+        $(function () {
+            $("#BaseDataDics_add_typeNo").combobox({
+                url: "/type/gettype",
+                valueField: 'typid',
+                textField: "name"
+            });
+
+        });
+    </script>
+</body>
+</html>
